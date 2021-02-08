@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import { useGLTF } from "@react-three/drei";
 import { usePlane } from "use-cannon";
 
-import RoomShape from "../public/room/bed.glb";
+import MeterShape from "../public/meter/meter.glb";
 
-export default function Room() {
-  const gltf = useGLTF(RoomShape, true);
+export default function Meter() {
+  const gltf = useGLTF(MeterShape, true);
   const [modelGeometry, setModelGeometry] = useState();
 
   if (!modelGeometry) {
@@ -13,24 +13,17 @@ export default function Room() {
     setModelGeometry(modelScene);
   }
 
-  const [ref] = usePlane(() => ({
-    rotation: [-Math.PI / 2, 0, 0],
-    position: [0, 6, 0]
-  }));
-
   return (
     <>
       <mesh
         attach="material"
         receiveShadow
-        scale={[1, 1, 1]}
-        position={[-2, 0, 10]}
+        scale={[0.25, 0.25, 0.25]}
+        rotation={[0, -1.5, 0]}
+        position={[2, 6, 0]}
       >
         <primitive object={modelGeometry} dispose={null} />
       </mesh>
-      {/* <mesh ref={ref}>
-        <planeBufferGeometry color={"none"} args={[1000, 1000]} />
-      </mesh> */}
     </>
   );
 }
